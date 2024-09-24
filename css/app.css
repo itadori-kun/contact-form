@@ -24,7 +24,7 @@
     --white: hsl(0, 0%, 100%);
     --grey-med: hsl(186, 15%, 59%);
     --grey-dark: hsl(187, 24%, 22%);
-    --fontsize: 16px;
+    --fontsize: 1rem;
 }
 
 /* Font smoothing and line height setting */
@@ -38,7 +38,7 @@ body {
 /* commons */
 label {
     display: block;
-    font-size: 16px;
+    font-size: var(--fontsize);
     line-height: 24px;
     color: var(--grey-dark);
     font-weight: normal;
@@ -82,7 +82,7 @@ section {
 
 /* heading style  */
 h1 {
-    font-size: 2rem;
+    font-size: calc(var(--fontsize) * 2);
     margin-bottom: 2rem;
     letter-spacing: -0.0625rem;
     font-weight: 700;
@@ -94,7 +94,7 @@ input:not(.query-div--box label input, .consent input[type="checkbox"]) {
     padding: 0.75rem 1.5rem;
     border: 1px solid var(--grey-med);
     border-radius: 0.5rem;
-    font-size: 1.125rem;
+    font-size: var(--fontsize);
     line-height: 1.4;
     outline-color: var(--green-med);
 }
@@ -148,7 +148,7 @@ input:not(.query-div--box label input, .consent input[type="checkbox"]) {
     border: 1px solid var(--grey-med);
     outline-color: var(--green-med);
     padding: 0.75rem 1.5rem;
-    font-size: 1rem;
+    font-size: var(--fontsize);
     line-height: 1.5rem;
     height: 6.5625rem;
 }
@@ -161,7 +161,7 @@ input:not(.query-div--box label input, .consent input[type="checkbox"]) {
 }
 
 .consent label {
-    font-size: 1rem;
+    font-size: var(--fontsize);
     line-height: 1.5rem;
     font-weight: normal;
 }
@@ -183,7 +183,7 @@ input[type="checkbox"],
     border: none;
     border-radius: 0.5rem;
     padding: 1rem 2.5rem;
-    font-size: 1.125rem;
+    font-size: var(--fontsize);
     cursor: pointer;
     width: 100%;
     line-height: 1.5;
