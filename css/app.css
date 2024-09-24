@@ -1,0 +1,20 @@
+/* Default margin, padding, pseudo-elements and box-sizing resets */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Variable declaration for colors, font-size */
+:root {
+
+    --green-light: hsl(148, 38%, 91%);
+    --green-med: hsl(169, 82%, 27%);
+    --red: hsl(0, 66%, 54%);
+    --white: hsl(0, 0%, 100%);
+    --grey-med: hsl(186, 15%, 59%);
+    --grey-dark: hsl(187, 24%, 22%);
+    --fontsize: 16px;
+}
