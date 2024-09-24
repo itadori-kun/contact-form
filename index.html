@@ -17,63 +17,70 @@
       <section aria-labelledby="contact-heading">
         <h1 id="contact-heading">Contact Us</h1>
         <form aria-describedby="form-instructions" novalidate>
-          <p id="form-instructions">All fields are required.</p>
-          <div>
-            <label for="first-name">First Name</label>
-            <input type="text" id="first-name" name="first-name" aria-required="true" aria-invalid="false" required>
-            <p class="errmsg" aria-live="assertive">
-              this field is required
-            </p>
-          </div>
-          <div>
-            <label for="last-name">Last Name</label>
-            <input type="text" id="last-name" name="last-name" aria-required="true" aria-invalid="false" required>
-            <p class="errmsg" aria-live="assertive">
-              this field is required
-            </p>
-          </div>
-          <div>
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" aria-required="true" aria-invalid="false" required>
-            <p class="errmsg" aria-live="assertive">
-              please enter a valid email address
-            </p>
-          </div>
-          <div>
-            <h2>Query Type</h2>
+          <div class="name">
             <div>
-              <div>
-                <input type="radio" id="general-enquiry" name="query-type" value="General Enquiry" aria-required="true"
-                  required>
-                <label for="general-enquiry">General Enquiry</label>
+              <label for="first-name">First Name <span class="asterisk">*</span></label>
+              <input type="text" id="first-name" name="first-name" aria-required="true" aria-invalid="false"
+                autocomplete="on" required>
+              <p class="errmsg" aria-live="assertive">
+                This field is required
+              </p>
+            </div>
+            <div>
+              <label for="last-name">Last Name <span class="asterisk">*</span></label>
+              <input type="text" id="last-name" name="last-name" aria-required="true" aria-invalid="false"
+                autocomplete="on" required>
+              <p class="errmsg" aria-live="assertive">
+                This field is required
+              </p>
+            </div>
+          </div>
+          <div class="email">
+            <label for="email">Email Address <span class="asterisk">*</span></label>
+            <input type="email" id="email" name="email" aria-required="true" aria-invalid="false" autocomplete="on"
+              required>
+            <p class="errmsg" aria-live="assertive">
+              Please enter a valid email address
+            </p>
+          </div>
+          <div class="query">
+            <label>Query Type <span class="asterisk">*</span></label>
+            <div class="query-div">
+              <div class="query-div--box">
+                <label for="general-enquiry">
+                  <input type="radio" id="general-enquiry" name="query-type" value="General Enquiry"
+                    aria-required="true" required>
+                  General Enquiry</label>
               </div>
-              <div>
-                <input type="radio" id="support-request" name="query-type" value="Support Request" aria-required="true"
-                  required>
-                <label for="support-request">Support Request</label>
+              <div class="query-div--box">
+                <label for="support-request">
+                  <input type="radio" id="support-request" name="query-type" value="Support Request"
+                    aria-required="true" required>
+                  Support Request</label>
               </div>
             </div>
             <p class="errmsg" aria-live="assertive">
-              please select a query type
+              Please select a query type
             </p>
           </div>
-          <div>
-            <label for="message">Message</label>
-            <textarea id="message" name="message" aria-required="true" aria-invalid="false" required></textarea>
+          <div class="msg">
+            <label for="message">Message <span class="asterisk">*</span></label>
+            <textarea id="message" name="message" aria-required="true" aria-invalid="false" rows="4"
+              required></textarea>
             <p class="errmsg" aria-live="assertive">
-              this field is required
+              This field is required
             </p>
           </div>
-          <div>
-            <label>
-              <input type="checkbox" name="consent" aria-required="true" required>
-              I consent to being contacted by the team
+          <div class="consent">
+            <input type="checkbox" name="consent" id="consent" aria-required="true" required>
+            <label for="consent">
+              I consent to being contacted by the <span>team <span class="asterisk">*</span></span>
             </label>
             <p class="errmsg" aria-live="assertive">
               to submit the form, you must consent to being contacted
             </p>
           </div>
-          <div>
+          <div class="btn">
             <button type="submit">Submit</button>
           </div>
         </form>

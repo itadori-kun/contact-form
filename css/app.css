@@ -7,6 +7,14 @@
     padding: 0;
 }
 
+/* fonts import from assets folder */
+@font-face {
+    font-family: 'Karla';
+    src: url('../assets/fonts/Karla-VariableFont_wght.ttf') format('truetype'), url('../assets/fonts/Karla-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: 400 700;
+    font-style: normal italic;
+}
+
 /* Variable declaration for colors, font-size */
 :root {
 
@@ -17,4 +25,199 @@
     --grey-med: hsl(186, 15%, 59%);
     --grey-dark: hsl(187, 24%, 22%);
     --fontsize: 16px;
+}
+
+/* Font smoothing and line height setting */
+body {
+    -webkitfont-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.2;
+    font-family: "Karla", sans-serif;
+}
+
+/* commons */
+label {
+    display: block;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--grey-dark);
+    font-weight: normal;
+    margin-bottom: 14px;
+}
+
+label span {
+    white-space: nowrap;
+}
+
+label .asterisk {
+    color: var(--green-med);
+    margin-left: 8px;
+}
+
+/* main container style */
+main {
+    background-color: var(--green-light);
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    width: 100vw;
+}
+
+/* form container holding the form and related contents styles  */
+section {
+    width: 100%;
+    max-width: 46rem;
+    background-color: var(--white);
+    padding: 2.5rem;
+    border-radius: 1rem;
+}
+
+/* error message styling */
+.errmsg {
+    color: var(--red);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    display: none;
+}
+
+/* heading style  */
+h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    letter-spacing: -0.0625rem;
+    font-weight: 700;
+    color: var(--grey-dark);
+}
+
+input:not(.query-div--box label input, .consent input[type="checkbox"]) {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--grey-med);
+    border-radius: 0.5rem;
+    font-size: 1.125rem;
+    line-height: 1.4;
+    outline-color: var(--green-med);
+}
+
+.query-div--box label,
+.consent label {
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+}
+
+.consent label {
+    display: inline-block;
+}
+
+.name,
+.query-div {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.email,
+.name,
+.query {
+    margin-bottom: 1.5rem;
+}
+
+.name div,
+.query-div--box {
+    flex: 1 0 18.438rem;
+}
+
+/* query type  */
+.query-div--box {
+    border: 1px solid var(--grey-med);
+    border-radius: 0.5rem;
+    width: 20rem;
+    padding: 0.78125rem 1.5rem;
+}
+
+.msg,
+.consent {
+    margin-bottom: 2.5rem;
+}
+
+/* text area */
+.msg textarea {
+    width: 100%;
+    border-radius: 0.5rem;
+    border: 1px solid var(--grey-med);
+    outline-color: var(--green-med);
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    height: 6.5625rem;
+}
+
+/* consent checkbox  */
+.consent {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.consent label {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: normal;
+}
+
+input[type="checkbox"],
+.query-div--box label input {
+    margin-right: 1rem;
+    align-self: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 2px solid var(--grey-med);
+    /* This changes the background-color: of both the checkbox and radios; */
+    accent-color: var(--green-med);
+}
+
+.btn button {
+    background-color: var(--green-med);
+    color: var(--white);
+    border: none;
+    border-radius: 0.5rem;
+    padding: 1rem 2.5rem;
+    font-size: 1.125rem;
+    cursor: pointer;
+    width: 100%;
+    line-height: 1.5;
+}
+
+@media (451px <=width < 780px) {
+    section {
+        width: 89.84%;
+        margin: 8rem auto;
+    }
+
+    .name div,
+    .query-div--box {
+        flex: 1 0 16.25rem;
+    }
+
+}
+
+@media (365px <=width < 450px) {
+    section {
+        width: 91.5%;
+        padding: 2.8rem 1.5rem;
+        margin: 2rem auto;
+    }
+}
+
+@media (width <=364px) {
+    section {
+        width: 80%;
+        padding: 1.5rem .8rem;
+    }
+
+    .name div,
+    .query-div--box {
+        flex: 1 0 10rem;
+    }
 }
