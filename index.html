@@ -72,24 +72,30 @@
             </p>
           </div>
           <div class="consent">
-            <input type="checkbox" name="consent" id="consent" aria-required="true" required>
-            <label for="consent">
-              I consent to being contacted by the <span>team <span class="asterisk">*</span></span>
-            </label>
+            <div class="consent--box">
+              <input type="checkbox" name="consent" id="consent" aria-required="true" required>
+              <label for="consent">
+                I consent to being contacted by the <span>team <span class="asterisk">*</span></span>
+              </label>
+            </div>
             <p class="errmsg" aria-live="assertive">
-              to submit the form, you must consent to being contacted
+              To submit the form, you must consent to being contacted
             </p>
           </div>
           <div class="btn">
             <button type="submit">Submit</button>
           </div>
         </form>
+        <div class="success">
+          <div class="success-heading">
+            <img src="./assets/images/icon-success-check.svg" alt="" width="24px" height="24px">
+            <h3>Message Sent!</h3>
+          </div>
+          <p>Thanks for completing the form. We'll be in touch soon!</p>
+        </div>
       </section>
-    </main>
 
-    <!-- 
-    Message Sent!
-    Thanks for completing the form. We'll be in touch soon! -->
+    </main>
 
   </body>
 

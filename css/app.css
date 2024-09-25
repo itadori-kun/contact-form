@@ -39,10 +39,10 @@ body {
 label {
     display: block;
     font-size: var(--fontsize);
-    line-height: 24px;
+    line-height: 1.5rem;
     color: var(--grey-dark);
     font-weight: normal;
-    margin-bottom: 14px;
+    margin-bottom: 0.875rem;
 }
 
 label span {
@@ -51,7 +51,7 @@ label span {
 
 label .asterisk {
     color: var(--green-med);
-    margin-left: 8px;
+    margin-left: 0.5rem;
 }
 
 /* main container style */
@@ -70,13 +70,16 @@ section {
     background-color: var(--white);
     padding: 2.5rem;
     border-radius: 1rem;
+    position: relative;
+    margin: 128px auto;
 }
 
 /* error message styling */
 .errmsg {
     color: var(--red);
-    font-size: 0.875rem;
+    font-size: 1rem;
     margin-top: 0.5rem;
+    line-height: 1.5;
     display: none;
 }
 
@@ -89,6 +92,10 @@ h1 {
     color: var(--grey-dark);
 }
 
+input {
+    cursor: pointer;
+}
+
 input:not(.query-div--box label input, .consent input[type="checkbox"]) {
     width: 100%;
     padding: 0.75rem 1.5rem;
@@ -97,6 +104,18 @@ input:not(.query-div--box label input, .consent input[type="checkbox"]) {
     font-size: var(--fontsize);
     line-height: 1.4;
     outline-color: var(--green-med);
+}
+
+input:not(.query-div--box label input, .consent input[type="checkbox"]):hover,
+.query-div--box:hover,
+.msg textarea:hover {
+    outline: thin ridge var(--green-med);
+}
+
+.query,
+.query-div--box label,
+.consent--box {
+    cursor: pointer;
 }
 
 .query-div--box label,
@@ -148,19 +167,21 @@ input:not(.query-div--box label input, .consent input[type="checkbox"]) {
     border: 1px solid var(--grey-med);
     outline-color: var(--green-med);
     padding: 0.75rem 1.5rem;
-    font-size: var(--fontsize);
+    font-size: 0.85rem;
     line-height: 1.5rem;
     height: 6.5625rem;
+    color: var(--grey-dark);
+    letter-spacing: -.5px;
 }
 
 /* consent checkbox  */
-.consent {
+.consent--box {
     display: flex;
     align-items: center;
     width: 100%;
 }
 
-.consent label {
+.consent--box label {
     font-size: var(--fontsize);
     line-height: 1.5rem;
     font-weight: normal;
@@ -189,6 +210,45 @@ input[type="checkbox"],
     line-height: 1.5;
 }
 
+.btn button:hover {
+    background-color: #1b4332;
+    transition: .5s ease-in-out;
+}
+
+/* success box */
+.success {
+    display: none;
+    background-color: var(--grey-dark);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin: 1.5rem;
+    width: 450px;
+    position: absolute;
+    top: -127px;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.success p {
+    color: var(--green-light);
+    font-size: var(--fontsize);
+    line-height: 1.5;
+    font-style: normal;
+}
+
+.success-heading {
+    display: flex;
+    align-content: center;
+    gap: .5rem;
+}
+
+.success-heading h3 {
+    color: var(--white);
+    font-size: 1.125rem;
+    line-height: 1.5;
+    margin-bottom: .5rem;
+}
+
 @media (451px <=width < 780px) {
     section {
         width: 89.84%;
@@ -200,6 +260,13 @@ input[type="checkbox"],
         flex: 1 0 16.25rem;
     }
 
+    .success {
+        position: fixed;
+        top: 0;
+        width: 80%;
+        transform: translate(-56.5%);
+    }
+
 }
 
 @media (365px <=width < 450px) {
@@ -207,6 +274,13 @@ input[type="checkbox"],
         width: 91.5%;
         padding: 2.8rem 1.5rem;
         margin: 2rem auto;
+    }
+
+    .success {
+        position: fixed;
+        width: 87%;
+        top: 0;
+        transform: translate(-57%);
     }
 }
 
@@ -219,5 +293,12 @@ input[type="checkbox"],
     .name div,
     .query-div--box {
         flex: 1 0 10rem;
+    }
+
+    .success {
+        position: fixed;
+        width: 75%;
+        top: 0;
+        transform: translate(-57.5%);
     }
 }
