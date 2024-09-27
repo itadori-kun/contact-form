@@ -153,6 +153,7 @@ input:not(.query-div--box label input, .consent input[type="checkbox"]):hover,
     border-radius: 0.5rem;
     width: 20rem;
     padding: 0.78125rem 1.5rem;
+    /* background-color: var(--green-light); */
 }
 
 .msg,
