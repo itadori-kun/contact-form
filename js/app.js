@@ -206,10 +206,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // Loop through each error message and check if it's empty
     errs.forEach(err => {
       if (err.innerHTML !== '') {
-        console.log(err, 'what error')
         allValid = false
       }
-    } )
+    })
     // return allvalid status if all error messages are empty
     return allValid
   }
