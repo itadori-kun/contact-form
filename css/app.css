@@ -80,7 +80,7 @@ section {
     font-size: 1rem;
     margin-top: 0.5rem;
     line-height: 1.5;
-    display: none;
+    /* display: none; */
 }
 
 /* heading style  */

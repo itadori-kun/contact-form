@@ -1,141 +1,101 @@
-let inputs = document.querySelectorAll('input')
-let btn = document.querySelector('button')
-const errs = document.querySelectorAll('.errmsg')
-const textBox = document.querySelector('#message')
-const errQuery = document.querySelector('.query-div')
-const queryBoxes = document.querySelectorAll('.query-div--box')
-const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/
-let success = document.querySelector('.success')
+document.addEventListener('DOMContentLoaded', function () {
+  let inputs = document.querySelectorAll('input')
+  let btn = document.querySelector('button')
+  const errs = document.querySelectorAll('.errmsg')
+  let textBox = document.getElementById('message')
+  const errQuery = document.querySelector('.query-div')
+  const queryBoxes = document.querySelectorAll('.query-div--box')
+  const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/
+  let success = document.querySelector('.success')
+  const errMsg = 'This field is required'
 
-function validateInput (input, err) {
-  if (input.value === '' || input.value === null) {
-    input.style.borderColor = 'var(--red)'
-    err.style.display = 'block'
-    err.setAttribute('aria-invalid', 'true')
-  } else {
-    input.style.borderColor = 'var(--light-gray)'
-    err.style.display = 'none'
-    err.setAttribute('aria-invalid', 'false')
+  function inputValidate (input) {
+    const err = input.nextElementSibling
+    // check if input field is empty and display error message if not
+    if (input.value === '' || input.value === null) {
+      input.style.borderColor = 'var(--red)'
+      err.style.display = 'block'
+      err.innerHTML = errMsg
+      err.setAttribute('aria-invalid', 'true')
+    } else {
+      input.style.borderColor = 'var(--light-gray)'
+      err.style.display = 'none'
+      err.innerHTML = ''
+      err.setAttribute('aria-invalid', 'false')
+    }
   }
-}
 
-function validateEmail (input, err) {
-  if (!input.value.match(emailPattern)) {
-    input.style.borderColor = 'var(--red)'
-    err.style.display = 'block'
-    err.setAttribute('aria-invalid', 'true')
-  } else {
-    input.style.borderColor = 'var(--light-gray)'
-    err.style.display = 'none'
-    err.setAttribute('aria-invalid', 'false')
+  function textBoxValidate (e) {
+    // check if textbox is empty and display error message if not
+    if (e.value.trim() === '' || e.value.trim() === null) {
+      e.style.borderColor = 'var(--red)'
+      e.nextElementSibling.style.display = 'block'
+      e.nextElementSibling.innerHTML = errMsg
+      e.nextElementSibling.setAttribute('aria-invalid', 'true')
+    } else {
+      e.style.borderColor = 'var(--light-gray)'
+      e.nextElementSibling.style.display = 'none'
+      e.nextElementSibling.innerHTML = ''
+      e.nextElementSibling.setAttribute('aria-invalid', 'false')
+    }
   }
-}
 
-textBox.addEventListener('input', e => {
-  validateTextBox(e)
-})
-
-function validateCheckbox (input, err) {
-  if (!input.checked) {
-    // err.innerText = 'Please select a query type'
-    err.style.display = 'block'
-  } else {
-    err.innerHTML = ''
-    // err.style.display = 'none'
-  }
-}
-
-function validateTextBox (textBox, err) {
-  if (textBox.value === '' || textBox.value === null) {
-    textBox.style.borderColor = 'var(--red)'
-    err.style.display = 'block'
-    err.setAttribute('aria-invalid', 'true')
-  } else {
-    textBox.style.borderColor = 'var(--light-gray)'
-    err.style.display = 'none'
-    err.setAttribute('aria-invalid', 'false')
-  }
-}
-
-// Function to change background color based on selected input
-function changeBgColor () {
-  inputs.forEach(input => {
-    if (input.id === 'support-request' || input.id === 'general-enquiry') {
-      // console.log('input:', input, 'index:', index)
-      input.addEventListener('change', function () {
-        // Reset all boxes to their default background color
-        queryBoxes.forEach(box => {
-          box.style.backgroundColor = ''
-          errQuery.nextElementSibling.style.display = 'block'
-        })
-
-        // If the current input is checked, change the background color of the corresponding box
-        if (input.checked) {
-          input.parentElement.parentElement.style.backgroundColor =
-            'var(--green-light)'
-          errQuery.nextElementSibling.style.display = 'none'
-        }
+  function radioValidate (input) {
+    const err = errQuery.nextElementSibling
+    if (!input.checked && input.type === 'radio') {
+      queryBoxes.forEach(box => {
+        // box.style.backgroundColor = ''
+        // err.style.display = 'block'
+        err.innerHTML = 'Please select a query type'
       })
-    }
-  })
-}
-
-changeBgColor()
-
-// console.log(textBox)
-
-inputs.forEach(input => {
-  input.addEventListener('input', () => {
-    console.log(input.value)
-
-    // errs.style.display = 'block'
-
-    if (input.value !== '' || input.value !== null) {
-      // errs.style.display = 'none'
-      // console.log(input.nextElementSibling)
-      errs.forEach(err => {
-        err.style.display = 'none'
+    } else {
+      // reset background color to default
+      queryBoxes.forEach(box => {
+        box.style.backgroundColor = ''
+        err.style.display = 'block'
       })
-      input.style.borderColor = 'var( --grey-med )'
+      // change background color of selected box and reset error message
+      input.parentElement.parentElement.style.backgroundColor =
+        'var(--green-light)'
+      err.innerHTML = ''
+      err.style.display = 'none'
+      err.setAttribute('aria-invalid', 'false')
     }
-  })
-})
+  }
 
-btn.addEventListener('click', function (e) {
-  e.preventDefault()
-  let allValid = true
-
-  inputs.forEach((input, i) => {
-    const err = errs[i]
-    validateInput(input, err)
-
-    if (input.id === 'email') {
-      validateEmail(input, err)
+  function checkboxValidate (input) {
+    const err = input.parentElement.nextElementSibling
+    // check if checkbox is checked and display error message if not
+    if (!input.checked) {
+      err.style.display = 'block'
+      err.setAttribute('aria-invalid', 'true')
+      err.innerHTML = 'To submit the form, you must consent to being contacted'
+    } else {
+      err.innerHTML = ''
+      err.style.display = 'none'
+      err.setAttribute('aria-invalid', 'false')
     }
+  }
 
-    if (input.id === 'consent') {
-      validateCheckbox(input, err)
+  // email validation
+  function validateEmail (input) {
+    const err = input.nextElementSibling
+    // check if email is valid and display error message if not
+    if (!input.value.match(emailPattern)) {
+      input.style.borderColor = 'var(--red)'
+      err.style.display = 'block'
+      err.setAttribute('aria-invalid', 'true')
+      err.innerHTML = 'Please enter a valid email address'
+    } else {
+      input.style.borderColor = 'var(--light-gray)'
+      err.style.display = 'none'
+      err.setAttribute('aria-invalid', 'false')
+      err.innerHTML = ''
     }
+  }
 
-    if (input.id === 'support-request' || input.id === 'general-enquiry') {
-      validateCheckbox(input, err)
-    }
-
-    if (err.style.display === 'block') {
-      allValid = false
-    }
-  })
-
-  errs.forEach(err => {
-    if (err.classList.contains('txt')) {
-      validateTextBox(textBox, err)
-      if (err.style.display === 'block') {
-        allValid = false
-      }
-    }
-  })
-
-  if (allValid) {
+  function successPopup () {
+    // display success message with javacript innerHTML
     success.style.display = 'block'
     success.innerHTML = `
           <div class="success-heading">
@@ -144,7 +104,107 @@ btn.addEventListener('click', function (e) {
             </div>
             <p>Thanks for completing the form. We'll be in touch soon!</p>
           </div>`
-  } else {
-    console.log('not valid')
+    // reset form fields to default
+    resetForm()
   }
+
+  // reset form fields to default
+  function resetForm () {
+    // reset form fields to default
+    // since it is just one form so we use the first form index
+    document.forms[0].reset()
+    // reset radio buttons background to default
+    queryBoxes.forEach(box => {
+      box.style.backgroundColor = ''
+    })
+    // clear success message after 2 seconds
+    setTimeout(() => {
+      success.innerHTML = ''
+      success.style.display = 'none'
+    }, 2000)
+  }
+
+  // textBoxValidate( textBox )
+  textBox.addEventListener('input', e => {
+    textBoxValidate(textBox)
+  })
+
+  // inputs event validation
+  inputs.forEach(input => {
+    if (
+      input.id !== 'consent' &&
+      input.id !== 'support-request' &&
+      input.id !== 'general-enquiry'
+    ) {
+      input.addEventListener('input', () => {
+        inputValidate(input)
+      })
+    }
+    // radio button change event
+    if (input.id === 'support-request' || input.id === 'general-enquiry') {
+      input.addEventListener('change', () => {
+        radioValidate(input)
+      })
+    }
+
+    if (input.id === 'consent') {
+      input.addEventListener('change', () => {
+        checkboxValidate(input)
+      })
+    }
+
+    if (input.id === 'email') {
+      input.addEventListener('input', () => {
+        if (input.value) {
+          validateEmail(input)
+        } else {
+          inputValidate(input)
+        }
+      })
+    }
+  })
+
+  // button click event validation
+  btn.addEventListener('click', function (e) {
+    // preventDefault button click
+    e.preventDefault()
+    let allValid = false
+
+    for (let index = 0; index < inputs.length; index++) {
+      if (inputs[index].id === 'consent') {
+        // validate checkbox
+        checkboxValidate(inputs[index])
+      } else if (
+        // validate input fields
+        inputs[index].id !== 'consent' &&
+        inputs[index].id !== 'support-request' &&
+        inputs[index].id !== 'general-enquiry'
+      ) {
+        inputValidate(inputs[index])
+      } else if (
+        // validate radio buttons
+        inputs[index].id === 'general-enquiry' ||
+        inputs[index].id === 'support-request'
+      ) {
+        radioValidate(inputs[index])
+      }
+    }
+    // validate textbox since it is not an input field
+    if (textBox) {
+      textBoxValidate(textBox)
+    }
+    // check if any error is displayed on the dom
+    errs.forEach(err => {
+      if (err.innerHTML === '' || err.innerHTML === null) {
+        allValid = true
+      } else {
+        allValid = false
+      }
+    })
+
+    // if no error is displayed, show success message
+    if (allValid) {
+      successPopup()
+    }
+  })
 })
