@@ -40,28 +40,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // function radioValidate (input) {
-  //   const err = errQuery.nextElementSibling
-  //   if (!input.checked && input.type === 'radio') {
-  //     queryBoxes.forEach(box => {
-  //       // box.style.backgroundColor = ''
-  //       err.innerHTML = 'Please select a query type'
-  //       // err.style.display = 'block'
-  //     })
-  //   } else {
-  //     // reset background color to default
-  //     queryBoxes.forEach(box => {
-  //       box.style.backgroundColor = ''
-  //       err.style.display = 'block'
-  //     })
-  //     // change background color of selected box and reset error message
-  //     input.parentElement.parentElement.style.backgroundColor =
-  //       'var(--green-light)'
-  //     err.innerHTML = ''
-  //     err.style.display = 'none'
-  //     err.setAttribute('aria-invalid', 'false')
-  //   }
-  // }
   function radioValidate (input) {
     const err = errQuery.nextElementSibling
     let isChecked = false
