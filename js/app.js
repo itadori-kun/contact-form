@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function inputValidate (input) {
     const err = input.nextElementSibling
     // check if input field is empty and display error message if not
-    if (input.value === '' || input.value === null) {
+    if (input.value.trim() === '' || input.value.trim() === null) {
       input.style.borderColor = 'var(--red)'
       err.style.display = 'block'
       err.innerHTML = errMsg
@@ -40,26 +40,62 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  // function radioValidate (input) {
+  //   const err = errQuery.nextElementSibling
+  //   if (!input.checked && input.type === 'radio') {
+  //     queryBoxes.forEach(box => {
+  //       // box.style.backgroundColor = ''
+  //       err.innerHTML = 'Please select a query type'
+  //       // err.style.display = 'block'
+  //     })
+  //   } else {
+  //     // reset background color to default
+  //     queryBoxes.forEach(box => {
+  //       box.style.backgroundColor = ''
+  //       err.style.display = 'block'
+  //     })
+  //     // change background color of selected box and reset error message
+  //     input.parentElement.parentElement.style.backgroundColor =
+  //       'var(--green-light)'
+  //     err.innerHTML = ''
+  //     err.style.display = 'none'
+  //     err.setAttribute('aria-invalid', 'false')
+  //   }
+  // }
   function radioValidate (input) {
     const err = errQuery.nextElementSibling
-    if (!input.checked && input.type === 'radio') {
-      queryBoxes.forEach(box => {
-        // box.style.backgroundColor = ''
-        // err.style.display = 'block'
+    let isChecked = false
+    queryBoxes.forEach(box => {
+      const radioInput = box.querySelector('input[type="radio"]')
+
+      // If one of the radio buttons is checked
+      if (radioInput.checked) {
+        isChecked = true
+
+        // Reset the background color of all query boxes
+        queryBoxes.forEach(box => {
+          box.style.backgroundColor = '' // Reset background color
+        })
+
+        // Set the background color for the selected radio box
+        radioInput.parentElement.parentElement.style.backgroundColor =
+          'var(--green-light)'
+
+        // Remove error message
+        err.innerHTML = ''
+        err.style.display = 'none'
+        err.setAttribute('aria-invalid', 'false')
+      }
+    })
+
+    // If no radio button is selected, show the error message
+    if (!isChecked) {
+      queryBoxes.forEach(() => {
+        // Display error message
         err.innerHTML = 'Please select a query type'
-      })
-    } else {
-      // reset background color to default
-      queryBoxes.forEach(box => {
-        box.style.backgroundColor = ''
         err.style.display = 'block'
+        err.setAttribute('aria-invalid', 'true')
       })
-      // change background color of selected box and reset error message
-      input.parentElement.parentElement.style.backgroundColor =
-        'var(--green-light)'
-      err.innerHTML = ''
-      err.style.display = 'none'
-      err.setAttribute('aria-invalid', 'false')
     }
   }
 
@@ -164,11 +200,24 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   })
 
+  // error validation check
+  function errorcheck () {
+    let allValid = true
+    // Loop through each error message and check if it's empty
+    errs.forEach(err => {
+      if (err.innerHTML !== '') {
+        console.log(err, 'what error')
+        allValid = false
+      }
+    } )
+    // return allvalid status if all error messages are empty
+    return allValid
+  }
+
   // button click event validation
   btn.addEventListener('click', function (e) {
     // preventDefault button click
     e.preventDefault()
-    let allValid = false
 
     for (let index = 0; index < inputs.length; index++) {
       if (inputs[index].id === 'consent') {
@@ -181,6 +230,9 @@ document.addEventListener('DOMContentLoaded', function () {
         inputs[index].id !== 'general-enquiry'
       ) {
         inputValidate(inputs[index])
+      } else if (inputs[index].id === 'email') {
+        // validate email
+        validateEmail(inputs[index])
       } else if (
         // validate radio buttons
         inputs[index].id === 'general-enquiry' ||
@@ -193,17 +245,9 @@ document.addEventListener('DOMContentLoaded', function () {
     if (textBox) {
       textBoxValidate(textBox)
     }
-    // check if any error is displayed on the dom
-    errs.forEach(err => {
-      if (err.innerHTML === '' || err.innerHTML === null) {
-        allValid = true
-      } else {
-        allValid = false
-      }
-    })
 
     // if no error is displayed, show success message
-    if (allValid) {
+    if (errorcheck()) {
       successPopup()
     }
   })
